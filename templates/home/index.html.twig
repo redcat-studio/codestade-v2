@@ -105,8 +105,15 @@
                 {% for event in events %}
                      
                     <div class='event-article' >
+                      
                         <img src="{{ asset( event.media ) }}" alt="Logo"/>
+                       
+                        <div class='event-article-descrip'>
+                        <h5><a href=' {{ path('event_show', {'id': event.id}) }}'>{{ event.title }} </a></h5>
+                        
+                        </div>
                     </div>
+
                 {% endfor %}
                 
             </div>

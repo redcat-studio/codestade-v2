@@ -63,7 +63,7 @@ class EventController extends AbstractController
     }
 
     
-
+   
     /**
      * @Route("/{id}", name="event_show", methods={"GET"})
      */
