@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+     <h1>Evenement de {{ event.title }} </h1> 
+
+    <table class="table">
+        <tbody>
+        
+         <tr>
+                <th>Societe</th>
+                <td>{{ event.adherent }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+           
+            <tr>
+                <th>Description</th>
+                <td>{{ event.description }}</td>
+            </tr>
+            <tr>
+                <th>Media</th>
+                <td>{{ event.media }}</td>
+            </tr>
+            <tr>
+                <th>Socialmeida</th>
+                <td>{{ event.socialmeida }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('events') }}">Retour</a>
+
+{% endblock %}

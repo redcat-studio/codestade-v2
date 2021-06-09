@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adherent{% endblock %}
+
+{% block body %}
+    <h1>Adherent</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ adherent.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ adherent.name }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ adherent.tel }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ adherent.email }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ adherent.address }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ adherent.url }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ adherent.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('adherents') }}">Retour</a>
+{% endblock %}

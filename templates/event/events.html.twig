@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+
+    <div class="page-evenements">
+        <section class="container-fluid pt-5 pb-5">
+
+            <section>
+                <div class="text-center">
+                    <a href="{{ path('home') }}" class="header-content">
+                        <img class="go-home-btn" src="{{ asset('icons/back.png') }}"/>
+                        <img class="img-responsive logo" src="{{ asset('images/logo.png') }}" alt="">
+                    </a>
+                </div>
+            </section>
+
+            <div class="contenu-boutons px-5">
+                <div class="text-center mt-5">
+                    <a class="btn btn-primary px-5 py-2" href="{{ path('events_future') }}">évènements à venir</a>
+                    <a class="btn btn-primary px-5 py-2" href="{{ path('events_happened') }}">événements passés</a>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+{% endblock %}
