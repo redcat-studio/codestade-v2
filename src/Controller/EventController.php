@@ -13,12 +13,12 @@ use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/evenement")
+ * @Route("/evenements")
  */
 class EventController extends AbstractController
 {
     /**
-     * @Route("/", name="events_future", methods={"GET"})
+     * @Route("/", name="events_to_come", methods={"GET"})
      */
     public function index(EventRepository $eventRepository): Response
     {

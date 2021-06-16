@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PrivatisationController extends AbstractController
 {
     /**
-     * @Route("/", name="privatisation_index", methods={"GET"})
+     * @Route("/", name="privatisation", methods={"GET"})
      */
     public function index(PrivatisationRepository $privatisationRepository): Response
     {

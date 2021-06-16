@@ -14,29 +14,31 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(AdherentRepository $adherentRepository,TypeCompanyRepository $typeCompanyRepository,EventRepository $eventRepository): Response
+    public function index(AdherentRepository $adherentRepository, TypeCompanyRepository $typeCompanyRepository, EventRepository $eventRepository): Response
     {
-        $restaurent = $adherentRepository->findBy(["typeCompany"=>$typeCompanyRepository->findOneBy(["name"=>'Restaurant'])]);
-        $commerce = $adherentRepository->findBy(["typeCompany"=>$typeCompanyRepository->findOneBy(["name"=>'Commerce'])]);
-        $entreprise = $adherentRepository->findBy(["typeCompany"=>$typeCompanyRepository->findOneBy(["name"=>'Entreprise'])]);
-        $events = $eventRepository->findBy([],['id' => 'desc']);
-        
-        $donnes = [];
-        $i =0;
-        foreach ($events as $event){
-            if($i < 4){
-                $donnes []= $event;
+        $restaurants = $adherentRepository->findBy(["typeCompany" => $typeCompanyRepository->findOneBy(["name" => 'Restaurant'])]);
+        $shops = $adherentRepository->findBy(["typeCompany" => $typeCompanyRepository->findOneBy(["name" => 'Commerce'])]);
+        $companies = $adherentRepository->findBy(["typeCompany" => $typeCompanyRepository->findOneBy(["name" => 'Entreprise'])]);
+        $allEvents = $eventRepository->findBy([], ['id' => 'desc']);
+
+        $events = [];
+        $i = 0;
+        foreach ($allEvents as $event) {
+            if ($i < 4) {
+                $events[] = $event;
             }
-           $i++;
+            $i++;
         }
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'restaurents'   =>$restaurent,
-            'commerces'   =>$commerce,
-            'entreprises'   =>$entreprise,
-            'events' =>$donnes,
+            'restaurants' => $restaurants,
+            'shops' => $shops,
+            'companies' => $companies,
+            'events' => $events,
         ]);
     }
+
     /**
      * @Route("/raccourci", name="raccourci")
      */

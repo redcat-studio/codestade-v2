@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecrutementController extends AbstractController
 {
     /**
-     * @Route("/", name="recrutement_index", methods={"GET"})
+     * @Route("/", name="recrutement", methods={"GET"})
      */
     public function index(RecrutementRepository $recrutementRepository): Response
     {
