@@ -6,6 +6,7 @@ use App\Entity\Privatisation;
 use App\Form\PrivatisationType;
 use App\Repository\AdherentRepository;
 use App\Repository\PrivatisationRepository;
+use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,14 +40,23 @@ class PrivatisationController extends AbstractController
     /**
      * @Route("/new", name="admin_privatisation_new", methods={"GET","POST"})
      */
-    public function new(Request $request,AdherentRepository $adherentRepository): Response
+    public function new(Request $request,AdherentRepository $adherentRepository, FileUploader $uploader): Response
     {
         $privatisation = new Privatisation();
         $form = $this->createForm(PrivatisationType::class, $privatisation);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
-            $privatisation->setAdherent($adherentRepository->findOneBy(["username" =>$this->getUser()->getUsername()]));
+            if ($form->getData()->getAdherent()) {
+                $privatisation->setAdherent($form->getData()->getAdherent());
+            } else {
+                $privatisation->setAdherent($adherentRepository->findOneBy(["username" => $this->getUser()->getUsername()]));
+            }
+
+            $uploader->setTargetDirectory($this->getParameter('logos_directory'));
+            $uploader->upload($form->getData()->getFile());
+            $privatisation->setPhoto($uploader->getFileName());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($privatisation);
             $entityManager->flush();

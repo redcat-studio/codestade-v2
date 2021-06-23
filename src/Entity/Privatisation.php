@@ -52,6 +52,11 @@ class Privatisation
      */
     private $photo;
 
+    /**
+     * Not an ORM column
+     */
+    private $file;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +142,18 @@ class Privatisation
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile($file)
+    {
+        $this->file = $file;
 
         return $this;
     }

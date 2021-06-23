@@ -160,8 +160,7 @@ class AdherentType extends AbstractType
                 }
 
                 $form->add('file', FileType::class, $options);
-            })
-        ;
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -10,14 +10,13 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class RecrutementType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-           
-
             ->add('titre', TextType::class, [
                 'label' => 'Titre',
                 'attr' => [
@@ -30,8 +29,8 @@ class RecrutementType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('contact', TextType::class, [
-                'label' => 'Coordonnées',
+            ->add('contact', EmailType::class, [
+                'label' => 'Adresse e-mail de contact',
                 'attr' => [
                     'class' => 'form-control'
                 ]
