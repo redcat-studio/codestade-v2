@@ -13,27 +13,28 @@ class PrivatisationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
         
             ->add('capacite', TextType::class, [
-                'label' => 'Capacite',
+                'label' => 'Capacité',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => "Nombre de personne (ex 250)"
+                    'placeholder' => "Nombre de personnes (ex : 250)"
                 ]
             ])
             ->add('surface', TextType::class, [
                 'label' => 'Surface',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => "Ex 50 m2"
+                    'placeholder' => "Ex : 50m²"
                 ]
             ])
             ->add('service', TextType::class, [
-                'label' => 'Service',
+                'label' => 'Services',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => "Service propose"
+                    'placeholder' => "Services proposés"
                 ]
             ])
             ->add('annonce', TextareaType::class, [

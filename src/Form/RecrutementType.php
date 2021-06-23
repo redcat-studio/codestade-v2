@@ -25,13 +25,13 @@ class RecrutementType extends AbstractType
                 ]
             ])
             ->add('lien', TextType::class, [
-                'label' => 'Url',
+                'label' => 'Lien externe',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('contact', TextType::class, [
-                'label' => 'Coordonne',
+                'label' => 'Coordonnées',
                 'attr' => [
                     'class' => 'form-control'
                 ]

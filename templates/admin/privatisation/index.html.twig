@@ -14,9 +14,11 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Capacite</th>
+                <th>Adhérent</th>
+                <th>Adresse</th>
+                <th>Capacité</th>
                 <th>Surface</th>
-                <th>Service</th>
+                <th>Services</th>
                 <th>Annonce</th>
                 <th>actions</th>
             </tr>
@@ -25,6 +27,8 @@
         {% for privatisation in privatisations %}
             <tr>
                 <td>{{ privatisation.id }}</td>
+                <td>{{ privatisation.adherent }}</td>
+                <td>{{ privatisation.address }}</td>
                 <td>{{ privatisation.capacite }}</td>
                 <td>{{ privatisation.surface }}</td>
                 <td>{{ privatisation.service }}</td>

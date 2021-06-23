@@ -13,13 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/**
- * @Route("/adherent")
- */
+//@Route("/adherent")
+
 class AdherentController extends AbstractController
 {
     /**
-     * @Route("/menu", name="adherents_menu", methods={"GET"})
+     * @Route("/adherents-menu", name="adherents_menu", methods={"GET"})
      */
     public function menu(TypeCompanyRepository $typeCompanyRepository): Response
     {
@@ -29,7 +28,46 @@ class AdherentController extends AbstractController
     }
 
     /**
-     * @Route("/", name="adherents", methods={"GET"})
+     * @Route("/commerces", name="shops", methods={"GET"})
+     */
+    public function commerces(AdherentRepository $adherentRepository, TypeCompanyRepository $repositoryCompany): Response
+    {
+        $commerceCategory = $repositoryCompany->findOneBy(['name' => 'Commerce']);
+
+        $shops = $adherentRepository->findAll(["typeCompany" => $commerceCategory->getId()]);
+        return $this->render('adherent/commerces.html.twig', [
+            'shops' => $shops
+        ]);
+    }
+
+    /**
+     * @Route("/restaurants", name="restaurants", methods={"GET"})
+     */
+    public function restaurants(AdherentRepository $adherentRepository, TypeCompanyRepository $repositoryCompany): Response
+    {
+        $restaurantCategory = $repositoryCompany->findOneBy(['name' => 'Restaurant']);
+
+        $restaurants = $adherentRepository->findAll(["typeCompany" => $restaurantCategory->getId()]);
+        return $this->render('adherent/restaurants.html.twig', [
+            'restaurants' => $restaurants
+        ]);
+    }
+
+    /**
+     * @Route("/entreprises", name="companies", methods={"GET"})
+     */
+    public function companies(AdherentRepository $adherentRepository, TypeCompanyRepository $repositoryCompany): Response
+    {
+        $companyCategory = $repositoryCompany->findOneBy(['name' => 'Entreprise']);
+
+        $companies = $adherentRepository->findAll(["typeCompany" => $companyCategory->getId()]);
+        return $this->render('adherent/companies.html.twig', [
+            'companies' => $companies
+        ]);
+    }
+
+    /**
+     * @Route("/adherents", name="adherents", methods={"GET"})
      */
     public function index(AdherentRepository $adherentRepository): Response
     {
@@ -46,7 +84,6 @@ class AdherentController extends AbstractController
         $adherent = new Adherent();
         $form = $this->createForm(AdherentType::class, $adherent);
         $form->handleRequest($request);
-echo 'rouget';
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adherent);
@@ -62,18 +99,18 @@ echo 'rouget';
     }
 
     /**
-     * @Route("/{id}", name="adherent_show", methods={"GET"})
+     * @Route("/adherent/{id}", name="adherent_show", methods={"GET"})
      */
-    public function show(Adherent $adherent,MediaRepository $mediaRepository): Response
-    { 
+    public function show(Adherent $adherent, MediaRepository $mediaRepository): Response
+    {
         return $this->render('adherent/show.html.twig', [
             'adherent' => $adherent,
-            'galeries' => $mediaRepository->findBy(["user"=>$adherent->getId()]),
+            'galeries' => $mediaRepository->findBy(["user" => $adherent->getId()]),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="adherent_edit", methods={"GET","POST"})
+     * @Route("/adherent/edit/{id}", name="adherent_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Adherent $adherent): Response
     {
@@ -93,11 +130,11 @@ echo 'rouget';
     }
 
     /**
-     * @Route("/{id}", name="adherent_delete", methods={"DELETE"})
+     * @Route("/adherent/delete/{id}", name="adherent_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Adherent $adherent): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$adherent->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $adherent->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($adherent);
             $entityManager->flush();

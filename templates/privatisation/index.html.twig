@@ -3,6 +3,24 @@
 {% block title %}Privatisation index{% endblock %}
 
 {% block body %}
+    <section class="about-us pb-4">
+        <div class="container">
+            <h2 class="about-us-title">Lieux privatisables</h2>
+            <p class="about-us-text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus autem, beatae consequuntur
+                distinctio doloribus enim error est expedita explicabo facilis.
+            <p>
+        </div>
+    </section>
+    <section class="privatizations">
+        {% for privatization in privatisations %}
+            <div class="privatization-card">
+                <div class="privatization-card__adherent">{{ privatization.adherent }}</div>
+                <div class="privatisation-card__address">{{ privatization.address }}</div>
+            </div>
+        {% endfor %}
+    </section>
+
     <h1>Privatisation index</h1>
 
     <table class="table">
